@@ -10,6 +10,7 @@ const qrSchema = new Schema({
         minlength: 3
     },
     item: { type: String, required: true,},
+    uid: { type: String, required: true,},
     qr: { type: String, required: true,},
     description: { type: String, required: true,},
     lastStatus: { type: Date, required: true,},

@@ -6,7 +6,6 @@ import axios from "axios";
 type Item = {
     username:string,
     item:string,
-    qr:string,
     description:string,
     lastStatus:Date,
 
@@ -18,12 +17,11 @@ type Props = {
 
 function Create_item({}: Props) {
 
-    const list = ["username", "item", "qr","description","lastStatus"]
+    const list = ["username", "item","description","lastStatus"]
 
     const [items, itemsSetState] = useState<Item>({
         username:"",
         item:"",
-        qr:"",
         description:"",
         lastStatus: new Date(),
 
@@ -43,12 +41,6 @@ function Create_item({}: Props) {
                 itemsSetState({
                     ...items,
                     item: e.target.value,
-                });
-                break
-            case "qr":
-                itemsSetState({
-                    ...items,
-                    qr: e.target.value,
                 });
                 break
             case "description":
@@ -77,13 +69,13 @@ function Create_item({}: Props) {
         const item = {
             username: items.username,
             item: items.item,
-            qr: items.qr,
             description: items.description,
             lastStatus: items.lastStatus,
         }
-        axios.post("http://localhost:5000/items/add", item).then((res: { data: any; }) => console.log(res.data));
-        console.log(item);
-        // window.location.href = "/items";
+
+        // axios.post("http://localhost:5000/items/add", item).then((res: { data: any; }) => console.log(res.data));
+        axios.post("http://localhost:5000/items/add", item);
+        window.location.href = "/items";
       }
     return (
     <>
@@ -91,7 +83,6 @@ function Create_item({}: Props) {
             <div>
             <InputField id="username" value={items.username} onChange={handleChange} />
             <InputField id="item" value={items.item} onChange={handleChange} />
-            <InputField id="qr" value={items.qr} onChange={handleChange} />
             <InputField id="description" value={items.description} onChange={handleChange} />
             <InputField id="lastStatus" value={items.lastStatus} onChange={handleChange} />
             

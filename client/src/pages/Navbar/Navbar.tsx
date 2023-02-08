@@ -9,17 +9,25 @@ function Navbar({}: Props) {
   const location = useLocation();
   const [homeLinkClasses, setHomeLinkClasses] = useState("nav-link");
   const [itemsLinkClasses, setItemsLinkClasses] = useState("nav-link");
+  const [createLinkClasses, setCreateLinkClasses] = useState("nav-link");
 
   useEffect(() => {
     if (location.pathname == "/") {
       setHomeLinkClasses("nav-link active");
       setItemsLinkClasses("nav-link");
-    } else if (location.pathname.includes("/items")) {
+      setCreateLinkClasses("nav-link");
+    } else if (location.pathname == "/items") {
       setItemsLinkClasses("nav-link active");
+      setHomeLinkClasses("nav-link");
+      setCreateLinkClasses("nav-link");
+    } else if(location.pathname == "/items/create") {
+      setCreateLinkClasses("nav-link active");
+      setItemsLinkClasses("nav-link");
       setHomeLinkClasses("nav-link");
     } else {
       setHomeLinkClasses("nav-link");
       setItemsLinkClasses("nav-link");
+      setCreateLinkClasses("nav-link");
     }
   }, [location]);
 
@@ -54,6 +62,11 @@ function Navbar({}: Props) {
             <li className="nav-item">
               <Link className={itemsLinkClasses} to="/items">
                 Items
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className={createLinkClasses} to="/items/create">
+                Create
               </Link>
             </li>
           </ul>

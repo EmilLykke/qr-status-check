@@ -5,6 +5,7 @@ import Home from "./pages/Home/Home"
 import Navbar from './pages/Navbar/Navbar';
 import Items from './pages/Items/Items';
 import Create_item from './pages/Items/Create_item/Create_item';
+import Item_preview from './pages/Items/Item_preview/Item_preview';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/items" element={<Items />} />
           <Route path="/items/create" element={<Create_item />} />
+          <Route path="/items/:id" element={<Item_preview />} />
         </Routes>
       
     </Router>

@@ -1,40 +1,66 @@
 const router = require("express").Router();
 let QrCode = require("../models/qrcode.model");
+const { v4 } = require("uuid");
+const QR = require('qrcode-svg');
+const svgToImg = require('svg-to-img');
 
 router.route("/").get((req,res)=>{
     QrCode.find().then(qr_codes=>res.json(qr_codes)).catch(err=>res.status(400).json("error: "+ err));
 });
 
-router.route("/add").post((req,res)=>{
+async function generateQRcode(url) {
+    const qrcode = new QR({
+        content: url,
+        padding: 0,
+        width: 256,
+        height: 256
+      });
+      const svg = qrcode.svg();
+      const buffer = await svgToImg.from(svg).toPng({
+        encoding: "base64"
+      });
+    const base64Image = `data:image/png;base64,${buffer.toString()}`;
+    // const base64Image = `${buffer.toString()}`;
+      return base64Image;
+  
+}
+
+router.route("/add").post(async (req,res)=>{
     const username = req.body.username;
     const item = req.body.item;
-    const qr = req.body.qr;
     const description = req.body.description;
     const lastStatus = Date.parse(req.body.lastStatus);
+    const uid = v4();
+
+    const url = "http://localhost:3000/items/"+uid;
+    const qr = await generateQRcode(url);
+    
 
     const newQrCode = new QrCode({
         username,
         item,
+        uid,
         qr,
         description,
         lastStatus,
     });
 
-    newQrCode.save().then(()=>res.json("QrCode added!")).catch(err => res.status(400).json("Error: "+ err));
-
+    newQrCode.save().then((newQrCode)=>{
+        res.json(newQrCode);
+} ).catch(err => res.status(400).json("Error: "+ err));
 });
 
 router.route("/:id").get((req,res)=>{
-    QrCode.findById(req.params.id).then(qr_code=>res.json(qr_code)).catch(err=>res.status(400).json("error: "+ err));
+    QrCode.findOne({uid:req.params.id}).then(qr_code=>res.json(qr_code)).catch(err=>res.status(400).json("error: "+ err));
 });
 
 router.route("/:id").delete((req,res)=>{
-    QrCode.findByIdAndDelete(req.params.id).then(()=>res.json("QR code deleted")).catch(err=>res.status(400).json("error: "+ err));
+    QrCode.findOneAndDelete({uid:req.params.id}).then(()=>res.json("QR code deleted")).catch(err=>res.status(400).json("error: "+ err));
 });
 
 
 router.route("/update/:id").post((req,res)=>{
-    QrCode.findById(req.params.id).then(qr_code=>{
+    QrCode.findOne({uid:req.params.id}).then(qr_code=>{
         qr_code.username = req.body.username;
         qr_code.item = req.body.item;
         qr_code.qr = req.body.qr;
