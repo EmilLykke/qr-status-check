@@ -63,7 +63,6 @@ router.route("/update/:id").post((req,res)=>{
     QrCode.findOne({uid:req.params.id}).then(qr_code=>{
         qr_code.username = req.body.username;
         qr_code.item = req.body.item;
-        qr_code.qr = req.body.qr;
         qr_code.description = req.body.description;
         qr_code.lastStatus = Date.parse(req.body.lastStatus);
 

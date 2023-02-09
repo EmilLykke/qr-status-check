@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import InputField from "./components/InputField";
-import "./Create_item.scss"
+import "./Edit_item.scss"
 import axios from "axios";
 
 type Item = {
@@ -15,9 +15,13 @@ type Props = {
 
 }
 
-function Create_item({}: Props) {
+function Edit_item({}: Props) {
 
-    const list = ["username", "item","description","lastStatus"]
+
+    const loc = window.location.pathname;
+    const id = loc.substring(loc.lastIndexOf('/') + 1);
+
+    const url = "http://localhost:5000/items/"+id;
 
     const [items, itemsSetState] = useState<Item>({
         username:"",
@@ -26,6 +30,11 @@ function Create_item({}: Props) {
         lastStatus: new Date(),
 
     });
+    // axios.get(url).then(data =>itemsSetState(data));
+    // console.log(item);
+    useEffect(() => {
+      axios.get(url).then((data) =>itemsSetState(data.data));
+      }, [])
 
 
     function handleChange(e: any) {
@@ -62,7 +71,6 @@ function Create_item({}: Props) {
     }
 
 
-    
     function handleSubmit(e: any) {
         e.preventDefault();
 
@@ -74,7 +82,7 @@ function Create_item({}: Props) {
         }
 
         // axios.post("http://localhost:5000/items/add", item).then((res: { data: any; }) => console.log(res.data));
-        axios.post("http://localhost:5000/items/add", item);
+        axios.post("http://localhost:5000/items/update/"+id, item);
         window.location.href = "/items";
       }
     return (
@@ -87,7 +95,7 @@ function Create_item({}: Props) {
             <InputField id="lastStatus" value={items.lastStatus} onChange={handleChange} />
             
             <div className="submit">
-                <button className="but-sub" onClick={handleSubmit}>Create</button>
+                <button className="but-sub" onClick={handleSubmit}>Update</button>
             </div>
             
             </div>
@@ -96,5 +104,5 @@ function Create_item({}: Props) {
     )
 }
 
-export default Create_item;
+export default Edit_item;
 

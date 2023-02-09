@@ -1,0 +1,122 @@
+.item-preview-container{
+    width: 100%;
+    height: 90vh;
+    display: grid;
+    // justify-content: center;
+    // align-content: center;
+    place-items: center;
+    padding: 25px;
+}
+
+.item-preview-content{
+    width: 100vh;
+    
+}
+
+.content-img{
+    display: flex;
+    justify-content: center;
+}
+
+.content-data{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.header{
+    margin: 20px 0px;
+    display: flex;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.content-text{
+    width: 250px;
+    margin: 20px 50px;
+    p{
+        font-size: 26px;
+    }
+    display: flex;
+    justify-content: center;
+    
+}
+
+.buts{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buts button{
+    width: 300px;
+    height: 75px;
+
+}
+
+
+
+.but-edit {
+    background-color: #c8c8c8;
+    border: none;
+    padding: 1rem;
+    font-size: 24px;
+    width: 10em;
+    border-radius: 1rem;
+    color: rgb(3, 164, 14);
+    box-shadow: 0 0.4rem #a8a8a8;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+   }
+   
+   .but-edit:active {
+    color: white;
+    box-shadow: 0 0.2rem #dfd9d9;
+    transform: translateY(0.2rem);
+   }
+   
+   .but-edit:hover:not(:disabled) {
+    background: rgb(3, 164, 14);
+    color: white;
+    text-shadow: 0 0.1rem #288307;
+   }
+   
+   .but-edit:disabled {
+    cursor: auto;
+    color: grey;
+   }
+
+.but-del {
+    background-color: #c8c8c8;
+    border: none;
+    padding: 1rem;
+    font-size: 24px;
+    width: 10em;
+    border-radius: 1rem;
+    color: rgb(153, 51, 51);
+    box-shadow: 0 0.4rem #a8a8a8;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    
+   }
+   
+   .but-del:active {
+    color: white;
+    box-shadow: 0 0.2rem #dfd9d9;
+    transform: translateY(0.2rem);
+   }
+   
+   .but-del:hover:not(:disabled) {
+    background: rgb(153, 51, 51);
+    color: white;
+    text-shadow: 0 0.1rem #820707;
+   }
+   
+   .but-del:disabled {
+    cursor: auto;
+    color: grey;
+   }

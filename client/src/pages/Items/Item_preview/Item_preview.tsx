@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import "./Item_preview.scss"
 
 type Props = {}
 
@@ -30,13 +32,54 @@ function Item_preview({}: Props) {
 
 
   return (
-    <div>
-        <img src={item.qr}></img>
-        <h1>{item.item}</h1>
-        <h1>{item.description}</h1>
-        <h1>{new Date(item.lastStatus).toDateString()}</h1>
-        <h1>{item.username}</h1>
+    <div className="item-preview-container">
+        <div className="item-preview-content">
+          <div className="content-img">
+            <img src={item.qr}></img>
+          </div>
+          
+          <h1 className="header">{item.item}</h1>
+          
+          <div className="content-data">
+          
+            <div className="content-text">
+              <div>
+            <h3>Description:</h3>
+            <p>{item.description}</p>
+            </div>
+            </div>
+          
+            <div className="content-text">
+              <div>
+            <h3>Last Status:</h3>
+            <p>{new Date(item.lastStatus).toDateString()}</p>
+            </div>
+            </div>
 
+            <div className="content-text">
+              <div>
+            <h3>Last status by: </h3>
+            <p>{item.username}</p>
+            </div>
+            </div>
+          </div>
+          <div className="content-data">
+          
+            <div className="content-text buts">
+            <Link className="but-edit" to={"/items/update/"+id}>Edit</Link>
+            </div>
+          
+            <div className="content-text">
+            
+            </div>
+
+            <div className="content-text buts">
+            <Link className="but-del" to={'/items/delete/'+id}>Delete</Link>
+            </div>
+          </div>
+          
+        </div>
+        
     </div>
   )
 }

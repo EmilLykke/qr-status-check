@@ -6,6 +6,8 @@ import Navbar from './pages/Navbar/Navbar';
 import Items from './pages/Items/Items';
 import Create_item from './pages/Items/Create_item/Create_item';
 import Item_preview from './pages/Items/Item_preview/Item_preview';
+import Edit_item from './pages/Items/Edit_item/Edit_item';
+import Delete_item from './pages/Items/Delete_item/Delete_item';
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
           <Route path="/items" element={<Items />} />
           <Route path="/items/create" element={<Create_item />} />
           <Route path="/items/:id" element={<Item_preview />} />
+          <Route path="/items/update/:id" element={<Edit_item />} />
+          <Route path="/items/delete/:id" element={<Delete_item />} />
         </Routes>
       
     </Router>
