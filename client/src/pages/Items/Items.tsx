@@ -3,11 +3,9 @@ import axios from "axios";
 import Item_display from "./components/Item_display";
 import "./Items.scss"
 
-type Props = {}
+function Items() {
 
-function Items({}: Props) {
-
-  const [items, itemsSetState] = useState<any>([]);
+  const [items, itemsSetState] = useState<any>();
 
   const url = "http://localhost:5000/items"
   

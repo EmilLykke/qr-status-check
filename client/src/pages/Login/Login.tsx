@@ -40,6 +40,7 @@ function Login() {
 
     // axios.post("http://localhost:5000/users/login",form).then((res: { data: any; }) => console.log(res.data));
     axios.post("http://localhost:5000/users/login",form);
+    window.location.href = "/items";
   };
 
   return (

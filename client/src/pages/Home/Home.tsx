@@ -1,6 +1,5 @@
-type Props = {}
 
-function Home({}: Props) {
+function Home() {
   return (
     <>
     <h1>Nice</h1>

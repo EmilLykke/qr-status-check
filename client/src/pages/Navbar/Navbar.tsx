@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./navbar.scss";
 
-type Props = {}
 
-function Navbar({}: Props) {
+
+function Navbar() {
 
   const location = useLocation();
   const [homeLinkClasses, setHomeLinkClasses] = useState("nav-link");
@@ -12,15 +12,15 @@ function Navbar({}: Props) {
   const [createLinkClasses, setCreateLinkClasses] = useState("nav-link");
 
   useEffect(() => {
-    if (location.pathname == "/") {
+    if (location.pathname === "/") {
       setHomeLinkClasses("nav-link active");
       setItemsLinkClasses("nav-link");
       setCreateLinkClasses("nav-link");
-    } else if (location.pathname == "/items") {
+    } else if (location.pathname === "/items") {
       setItemsLinkClasses("nav-link active");
       setHomeLinkClasses("nav-link");
       setCreateLinkClasses("nav-link");
-    } else if(location.pathname == "/items/create") {
+    } else if(location.pathname === "/items/create") {
       setCreateLinkClasses("nav-link active");
       setItemsLinkClasses("nav-link");
       setHomeLinkClasses("nav-link");

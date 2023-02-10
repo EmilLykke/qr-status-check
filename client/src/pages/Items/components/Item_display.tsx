@@ -18,7 +18,7 @@ function Item_display({item,qr,uid,description,lastStatus}: Props) {
     <Link className="card" to={"/items/"+uid}>
         <div className="card-details">
                 <div className="card-details-img">
-                    <img src={qr} />
+                    <img src={qr} alt=""/>
                 </div>
                 <div className="card-details-img">
                     <p className="text-title">{item}</p>

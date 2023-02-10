@@ -10,12 +10,8 @@ type Item = {
     lastStatus:Date,
 
 }
-type Props = {
 
-
-}
-
-function Create_item({}: Props) {
+function Create_item() {
 
     const [items, itemsSetState] = useState<Item>({
         username:"",

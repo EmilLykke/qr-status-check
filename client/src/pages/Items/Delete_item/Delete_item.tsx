@@ -1,8 +1,8 @@
 import axios from "axios";
 
-type Props = {}
 
-function Delete_item({}: Props) {
+
+function Delete_item() {
 
 
     const loc = window.location.pathname;

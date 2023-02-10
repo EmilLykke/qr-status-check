@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Item_preview.scss"
 
-type Props = {}
 
-function Item_preview({}: Props) {
+
+function Item_preview() {
 
 
     const [item, itemSetState] = useState({
@@ -26,7 +26,7 @@ function Item_preview({}: Props) {
     // console.log(item);
     useEffect(() => {
       axios.get(url).then(data =>itemSetState(data.data));
-      }, [])
+      })
 
     
 
@@ -35,7 +35,7 @@ function Item_preview({}: Props) {
     <div className="item-preview-container">
         <div className="item-preview-content">
           <div className="content-img">
-            <img src={item.qr}></img>
+            <img src={item.qr} alt=""/>
           </div>
           
           <h1 className="header">{item.item}</h1>

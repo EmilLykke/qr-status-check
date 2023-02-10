@@ -10,12 +10,9 @@ type Item = {
     lastStatus:Date,
 
 }
-type Props = {
 
 
-}
-
-function Edit_item({}: Props) {
+function Edit_item() {
 
 
     const loc = window.location.pathname;
@@ -34,7 +31,7 @@ function Edit_item({}: Props) {
     // console.log(item);
     useEffect(() => {
       axios.get(url).then((data) =>itemsSetState(data.data));
-      }, [])
+      })
 
 
     function handleChange(e: any) {
