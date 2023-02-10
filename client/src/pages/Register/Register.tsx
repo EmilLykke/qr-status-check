@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import "./Login.scss";
+import "./Register.scss";
 
 import sha256 from "crypto-js/sha256";
 import axios from "axios";
 
 interface Inputs {
     username: string,
+  email: string,
   password: string,
 }
 
-function Login() {
-  const [inputs, setInputs] = useState<Inputs>({ username:"", password: "" });
+function Register() {
+  const [inputs, setInputs] = useState<Inputs>({ username:"", email: "", password: "" });
 
-  const [form, setForm] = useState<Inputs>({username: "", password: ""})
+  const [form, setForm] = useState<Inputs>({username: "", email:"", password: ""})
 
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,6 +23,7 @@ function Login() {
       ...inputs,
       [event.target.name]: event.target.value,
     }));
+
 
     let val: string;
     if(event.target.name === "password"){
@@ -38,8 +40,10 @@ function Login() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // axios.post("http://localhost:5000/users/login",form).then((res: { data: any; }) => console.log(res.data));
-    axios.post("http://localhost:5000/users/login",form);
+    // axios.post("http://localhost:5000/users/register",form).then((res: { data: any; }) => console.log(res.data));
+    axios.post("http://localhost:5000/users/register",form);
+
+    window.location.href = "/items"
   };
 
   return (
@@ -54,6 +58,16 @@ function Login() {
                 placeholder="Enter username"
                 name="username"
                 value={inputs.username}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="formBasicEmail">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Enter email"
+                name="email"
+                value={inputs.email}
                 onChange={handleInputChange}
               />
             </Form.Group>
@@ -78,4 +92,4 @@ function Login() {
   );
 };
 
-export default Login;
+export default Register;

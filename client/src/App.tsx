@@ -9,6 +9,7 @@ import Item_preview from './pages/Items/Item_preview/Item_preview';
 import Edit_item from './pages/Items/Edit_item/Edit_item';
 import Delete_item from './pages/Items/Delete_item/Delete_item';
 import Login from './pages/Login/Login';
+import Register from './pages/Register/Register';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/items/update/:id" element={<Edit_item />} />
           <Route path="/items/delete/:id" element={<Delete_item />} />
           <Route path="/user/login" element={<Login />} />
+          <Route path="/user/register" element={<Register />} />
         </Routes>
       
     </Router>
