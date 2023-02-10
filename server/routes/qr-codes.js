@@ -32,8 +32,8 @@ router.route("/add").post(async (req,res)=>{
     const lastStatus = Date.parse(req.body.lastStatus);
     const uid = v4();
 
-    // const url = "http://localhost:3000/items/"+uid;
-    const url = "http://lykkegrann.dk:3000/items/"+uid;
+    const url = "http://localhost:3000/items/"+uid;
+    // const url = "http://lykkegrann.dk:3000/items/"+uid;
     const qr = await generateQRcode(url);
     
 

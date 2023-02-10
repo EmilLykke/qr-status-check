@@ -17,8 +17,6 @@ type Props = {
 
 function Create_item({}: Props) {
 
-    const list = ["username", "item","description","lastStatus"]
-
     const [items, itemsSetState] = useState<Item>({
         username:"",
         item:"",

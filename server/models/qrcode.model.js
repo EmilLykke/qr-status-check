@@ -19,6 +19,6 @@ const qrSchema = new Schema({
     timestamps:true,
 });
 
-const QrCode = mongoose.model("QrCode", qrSchema);
+const QrCode = mongoose.model("QrCode", qrSchema, "Items");
 
 module.exports = QrCode;
