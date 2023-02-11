@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import "./Login.scss";
-
 import sha256 from "crypto-js/sha256";
 import axios from "axios";
+import { ReactSession }  from 'react-client-session';
+
+
 
 interface Inputs {
     username: string,
@@ -14,7 +16,6 @@ function Login() {
   const [inputs, setInputs] = useState<Inputs>({ username:"", password: "" });
 
   const [form, setForm] = useState<Inputs>({username: "", password: ""})
-
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.persist();
@@ -35,11 +36,14 @@ function Login() {
     }));
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>){
     event.preventDefault();
 
     // axios.post("http://localhost:5000/users/login",form).then((res: { data: any; }) => console.log(res.data));
-    axios.post("http://localhost:5000/users/login",form);
+    const loginRes = await axios.post("http://localhost:5000/users/login",form);
+    ReactSession.set('accessToken', loginRes.data.accessToken, { path: '/'})
+    ReactSession.set('refreshToken', loginRes.data.refreshToken, {path: '/'})
+
     window.location.href = "/items";
   };
 

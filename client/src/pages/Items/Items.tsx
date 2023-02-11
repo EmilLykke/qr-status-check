@@ -2,17 +2,26 @@ import { useEffect, useState } from "react"
 import axios from "axios";
 import Item_display from "./components/Item_display";
 import "./Items.scss"
+import { ReactSession }  from 'react-client-session';
 
-function Items() {
+type Props = {}
+function Items({}: Props) {
 
-  const [items, itemsSetState] = useState<any>();
+  const [items, itemsSetState] = useState<any>([]);
 
   const url = "http://localhost:5000/items"
   
   // axios.get(url).then(data =>itemsSetState(data));
   // console.log(items);
+
+  const config = {
+    headers:{
+      Authorization: "Bearer " + ReactSession.get("accessToken"),
+    }
+  };
+
   useEffect(() => {
-    axios.get(url).then(data =>itemsSetState(data.data));
+    axios.get(url, config).then(data =>itemsSetState(data.data));
     }, [items])
 
   return (

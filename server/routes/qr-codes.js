@@ -4,7 +4,11 @@ const { v4 } = require("uuid");
 const QR = require('qrcode-svg');
 const svgToImg = require('svg-to-img');
 
-router.route("/").get((req,res)=>{
+const { authenticateToken } = require('../index');
+
+
+
+router.get("/", authenticateToken, (req,res)=>{
     QrCode.find().then(qr_codes=>res.json(qr_codes)).catch(err=>res.status(400).json("error: "+ err));
 });
 
@@ -25,7 +29,7 @@ async function generateQRcode(url) {
   
 }
 
-router.route("/add").post(async (req,res)=>{
+router.post("/add", authenticateToken, async (req,res)=>{
     const username = req.body.username;
     const item = req.body.item;
     const description = req.body.description;
@@ -48,19 +52,19 @@ router.route("/add").post(async (req,res)=>{
 
     newQrCode.save().then((newQrCode)=>{
         res.json(newQrCode);
-} ).catch(err => res.status(400).json("Error: "+ err));
+    }).catch(err => res.status(400).json("Error: "+ err));
 });
 
-router.route("/:id").get((req,res)=>{
+router.get("/:id", authenticateToken, (req,res)=>{
     QrCode.findOne({uid:req.params.id}).then(qr_code=>res.json(qr_code)).catch(err=>res.status(400).json("error: "+ err));
 });
 
-router.route("/:id").delete((req,res)=>{
+router.delete("/:id", authenticateToken, (req,res)=>{
     QrCode.findOneAndDelete({uid:req.params.id}).then(()=>res.json("QR code deleted")).catch(err=>res.status(400).json("error: "+ err));
 });
 
 
-router.route("/update/:id").post((req,res)=>{
+router.post("/update/:id",authenticateToken, (req,res)=>{
     QrCode.findOne({uid:req.params.id}).then(qr_code=>{
         qr_code.username = req.body.username;
         qr_code.item = req.body.item;

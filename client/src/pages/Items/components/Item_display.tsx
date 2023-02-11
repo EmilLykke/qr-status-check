@@ -14,7 +14,8 @@ function Item_display({item,qr,uid,description,lastStatus}: Props) {
 
     const date = new Date(lastStatus);
 
-  return (<div className="item-grid-card">
+  return (
+  <div className="item-grid-card">
     <Link className="card" to={"/items/"+uid}>
         <div className="card-details">
                 <div className="card-details-img">
