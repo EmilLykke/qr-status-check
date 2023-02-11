@@ -29,11 +29,12 @@ router.post("/login", async (req,res)=>{
     const accessToken = genereateAccessToken(user);
     const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
 
-    const newRefreshTokenSchema = new RefreshTokenSchema({ refreshToken: refreshToken });
+    // const newRefreshTokenSchema = new RefreshTokenSchema({ refreshToken: refreshToken });
     // newRefreshTokenSchema.save().then(()=>res.json("RefreshToken added!")).catch(err => res.status(400).json("Error: "+ err));
-    newRefreshTokenSchema.save();
+    // newRefreshTokenSchema.save();
     // console.log(re);
     res.json({accessToken: accessToken, refreshToken: refreshToken});
+    
     
 });
 

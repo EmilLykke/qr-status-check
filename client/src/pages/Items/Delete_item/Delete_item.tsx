@@ -17,7 +17,7 @@ function Delete_item() {
 
     axios.delete(url,config).then(data =>console.log(data));
 
-    window.location.href = "/items"
+    window.location.href = "/items";
 
   return (
     <div>Delete_item</div>
