@@ -1,10 +1,32 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./navbar.scss";
-
+import { ReactSession }  from 'react-client-session';
 
 
 function Navbar() {
+
+  const access = ReactSession.get("accessToken");
+
+  let right;
+
+  if(!access){
+    right = <><li className="nav-item">
+      <Link className={"nav-link"} to="/user/login">
+        Login
+      </Link>
+    </li><li className="nav-item">
+        <Link className={"nav-link"} to="/user/register">
+          Register
+        </Link>
+      </li></>;
+  } else if(access){
+    right = <><li className="nav-item">
+    <Link className={"nav-link"} to="/user/logout">
+      Logout
+    </Link>
+  </li></>;
+  }
 
   const location = useLocation();
   const [homeLinkClasses, setHomeLinkClasses] = useState("nav-link");
@@ -72,16 +94,7 @@ function Navbar() {
           </ul>
 
           <ul  className="navbar-nav end">
-              <li  className="nav-item">
-                <Link className={"nav-link"} to="/user/login">
-                  Login
-                </Link>
-              </li>
-              <li  className="nav-item">
-                <Link className={"nav-link"} to="/user/register">
-                  Register
-                </Link>
-              </li>
+              {right}
           </ul >
 
         </div>
