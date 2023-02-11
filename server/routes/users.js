@@ -33,7 +33,7 @@ router.post("/login", async (req,res)=>{
     // newRefreshTokenSchema.save().then(()=>res.json("RefreshToken added!")).catch(err => res.status(400).json("Error: "+ err));
     newRefreshTokenSchema.save();
     // console.log(re);
-    res.json({accessToken: accessToken, refreshToken: refreshToken})
+    res.json({accessToken: accessToken, refreshToken: refreshToken});
     
 });
 

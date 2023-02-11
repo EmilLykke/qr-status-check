@@ -43,7 +43,7 @@ function Register() {
     // axios.post("http://localhost:5000/users/register",form).then((res: { data: any; }) => console.log(res.data));
     axios.post("http://localhost:5000/users/register",form);
 
-    window.location.href = "/items"
+    window.location.href = "/user/login";
   };
 
   return (

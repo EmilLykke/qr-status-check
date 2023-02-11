@@ -2,11 +2,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Item_preview.scss"
-
+import { ReactSession }  from 'react-client-session';
 
 
 function Item_preview() {
-
+  const config = {headers:{Authorization: "Bearer " + ReactSession.get("accessToken"),}};
 
     const [item, itemSetState] = useState({
         username: "",
@@ -25,7 +25,7 @@ function Item_preview() {
     // axios.get(url).then(data =>itemsSetState(data));
     // console.log(item);
     useEffect(() => {
-      axios.get(url).then(data =>itemSetState(data.data));
+      axios.get(url,config).then(data =>itemSetState(data.data));
       })
 
     

@@ -2,6 +2,8 @@ import { useState } from "react";
 import InputField from "./components/InputField";
 import "./Create_item.scss"
 import axios from "axios";
+import { ReactSession }  from 'react-client-session';
+import jwt_decode from "jwt-decode"; 
 
 type Item = {
     username:string,
@@ -25,12 +27,6 @@ function Create_item() {
     function handleChange(e: any) {
 
         switch(e.target.id) {
-            case "username":
-                itemsSetState({
-                    ...items,
-                    username: e.target.value,
-                });
-                break;
             case "item":
                 itemsSetState({
                     ...items,
@@ -55,27 +51,33 @@ function Create_item() {
           
     }
 
+    
 
     
     function handleSubmit(e: any) {
         e.preventDefault();
 
+        const config = {
+            headers:{
+              Authorization: "Bearer " + ReactSession.get("accessToken"),
+            }
+          };
+
+
         const item = {
-            username: items.username,
+            username: JSON.parse(JSON.stringify(jwt_decode(ReactSession.get("accessToken")))).name,
             item: items.item,
             description: items.description,
             lastStatus: items.lastStatus,
         }
-
         // axios.post("http://localhost:5000/items/add", item).then((res: { data: any; }) => console.log(res.data));
-        axios.post("http://localhost:5000/items/add", item);
+        axios.post("http://localhost:5000/items/add", item,config);
         window.location.href = "/items";
       }
     return (
     <>
         <div className="create-form">
             <div>
-            <InputField id="username" value={items.username} onChange={handleChange} />
             <InputField id="item" value={items.item} onChange={handleChange} />
             <InputField id="description" value={items.description} onChange={handleChange} />
             <InputField id="lastStatus" value={items.lastStatus} onChange={handleChange} />

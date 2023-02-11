@@ -53,7 +53,7 @@ function Navbar() {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
+          <ul className="navbar-nav me-auto">
             <li className="nav-item">
               <Link className={homeLinkClasses} to="/">
                 Home
@@ -70,6 +70,20 @@ function Navbar() {
               </Link>
             </li>
           </ul>
+
+          <ul  className="navbar-nav end">
+              <li  className="nav-item">
+                <Link className={"nav-link"} to="/user/login">
+                  Login
+                </Link>
+              </li>
+              <li  className="nav-item">
+                <Link className={"nav-link"} to="/user/register">
+                  Register
+                </Link>
+              </li>
+          </ul >
+
         </div>
       </div>
     </nav>

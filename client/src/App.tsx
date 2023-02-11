@@ -10,6 +10,7 @@ import Edit_item from './pages/Items/Edit_item/Edit_item';
 import Delete_item from './pages/Items/Delete_item/Delete_item';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
+import Logout from './pages/Logout/Logout';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path="/items/delete/:id" element={<Delete_item />} />
           <Route path="/user/login" element={<Login />} />
           <Route path="/user/register" element={<Register />} />
+          <Route path="/user/logout" element={<Logout />} />
         </Routes>
       
     </Router>
