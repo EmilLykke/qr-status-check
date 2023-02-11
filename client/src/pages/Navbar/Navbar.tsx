@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./navbar.scss";
 import { ReactSession }  from 'react-client-session';
-
+import jwt_decode from "jwt-decode";
 
 function Navbar() {
 
@@ -22,6 +22,10 @@ function Navbar() {
       </li></>;
   } else if(access){
     right = <><li className="nav-item">
+    <p className={"nav-link"}>
+      {JSON.parse(JSON.stringify(jwt_decode(ReactSession.get("accessToken")))).name}
+    </p>
+  </li><li className="nav-item">
     <Link className={"nav-link"} to="/user/logout">
       Logout
     </Link>
